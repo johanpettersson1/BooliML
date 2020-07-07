@@ -11,10 +11,10 @@ namespace Booli.Database
             {
                 using (var _context = new BooliContext())
                 {
-                    var sold = _context.Solds.Where(s => s.booliId == property.booliId).FirstOrDefault();
+                    var sold = _context.Sold.Where(s => s.booliId == property.booliId).FirstOrDefault();
                     if (sold != null)
                     {
-                        _context.Solds.Remove(sold);
+                        _context.Sold.Remove(sold);
                         _context.SaveChanges();
                     }
 
@@ -27,7 +27,7 @@ namespace Booli.Database
                     }
 
                     property.source = source;
-                    _context.Solds.Add(property);
+                    _context.Sold.Add(property);
                     _context.SaveChanges();
                 }
             }

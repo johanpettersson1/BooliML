@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Booli
 {
-    public class Helper
+    public class Helpers
     {
         public static string Hash(string stringToHash)
         {

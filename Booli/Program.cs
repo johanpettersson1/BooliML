@@ -25,8 +25,8 @@ namespace Booli
             while (offset < max)
             {
                 long timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-                string unique = Helper.Get16CharacterRandomString();
-                string url = $"{baseUrl}{queryKey}?q={queryValue}&limit={limit}&offset={offset}&callerId={callerId}&time={timestamp}&unique={unique}&hash={Helper.Hash(callerId + timestamp + privateKey + unique)}";
+                string unique = Helpers.Get16CharacterRandomString();
+                string url = $"{baseUrl}{queryKey}?q={queryValue}&limit={limit}&offset={offset}&callerId={callerId}&time={timestamp}&unique={unique}&hash={Helpers.Hash(callerId + timestamp + privateKey + unique)}";
                 using (Stream s = client.GetStreamAsync(url).Result)
                 using (StreamReader sr = new StreamReader(s))
                 {
