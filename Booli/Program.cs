@@ -19,7 +19,7 @@ namespace Booli
             string privateKey = ConfigurationManager.AppSettings["privateKey"];
             string queryKey = "sold"; // possible values: [listings, sold, areas]
             string queryValue = "stockholm"; // stockholm, nacka, etc.
-            long limit = 500;
+            long limit = 500; // max 500. src: https://www.booli.se/p/api/
             long offset = 0;
             long max = int.MaxValue;
             while (offset < max)
