@@ -32,7 +32,7 @@ namespace Booli
                 {
                     string jsonString = sr.ReadToEnd();
                     var data = JsonSerializer.Deserialize<Query>(jsonString);
-                    Commands.SaveDataToDatabase(data);
+                    Commands.Save(data.sold);
                     max = data.totalCount;
                 }
 
