@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 
 namespace Booli
 {
@@ -19,15 +20,27 @@ namespace Booli
             string baseUrl = "https://api.booli.se/";
             string callerId = ConfigurationManager.AppSettings["callerId"];
             string privateKey = ConfigurationManager.AppSettings["privateKey"];
-            long timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            string unique = Get16CharacterRandomString();
-            string url = $"{baseUrl}sold?q=stockholm&limit=500&callerId={callerId}&time={timestamp}&unique={unique}&hash={Hash(callerId + timestamp + privateKey + unique)}";
-            using (Stream s = client.GetStreamAsync(url).Result)
-            using (StreamReader sr = new StreamReader(s))
+            string queryKey = "sold"; // possible values: [listings, sold, areas]
+            string queryValue = "stockholm"; // stockholm, nacka, etc.
+            long limit = 500;
+            long offset = 0;
+            long max = int.MaxValue;
+            while (offset < max)
             {
-                string jsonString = sr.ReadToEnd();
-                var data = JsonSerializer.Deserialize<Database.Query>(jsonString);
-                SaveDataToDatabase(data);
+                long timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                string unique = Get16CharacterRandomString();
+                string url = $"{baseUrl}{queryKey}?q={queryValue}&limit={limit}&offset={offset}&callerId={callerId}&time={timestamp}&unique={unique}&hash={Hash(callerId + timestamp + privateKey + unique)}";
+                using (Stream s = client.GetStreamAsync(url).Result)
+                using (StreamReader sr = new StreamReader(s))
+                {
+                    string jsonString = sr.ReadToEnd();
+                    var data = JsonSerializer.Deserialize<Query>(jsonString);
+                    SaveDataToDatabase(data);
+                    max = data.totalCount;
+                }
+
+                offset += 500;
+                Thread.Sleep(1000);
             }
         }
 
