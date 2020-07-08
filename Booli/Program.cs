@@ -34,6 +34,7 @@ namespace Booli
                     var data = JsonSerializer.Deserialize<Query>(jsonString);
                     Commands.Save(data.sold);
                     max = data.totalCount;
+                    Console.WriteLine($"{String.Format("{0:0.00}", (float)100 * offset / (float)data.totalCount)}%");
                 }
 
                 offset += 500;

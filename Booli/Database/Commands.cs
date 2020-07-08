@@ -23,7 +23,6 @@ namespace Booli.Database
                     {
                         source = new Source { id = property.source.id, name = property.source.name, type = property.source.type, url = property.source.url };
                         _context.Sources.Add(source);
-                        _context.SaveChanges();
                     }
 
                     property.source = source;
