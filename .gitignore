@@ -340,3 +340,5 @@ ASALocalRun/
 healthchecksdb
 /Booli/App.config
 /Booli/Migrations
+/BooliML.ConsoleApp/App.config
+/BooliML.Model/App.config

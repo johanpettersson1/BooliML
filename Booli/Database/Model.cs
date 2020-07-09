@@ -60,7 +60,6 @@ namespace Booli.Database
         public List<string> namedAreas { get; set; }
         public Region region { get; set; }
         public Distance distance { get; set; }
-
     }
 
     public class Source
