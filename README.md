@@ -14,10 +14,10 @@
 6. `dotnet run --project BooliML.Data`
 
 ## Create view in SQL
-`CREATE VIEW ML AS SELECT listPrice,rent,[floor],livingArea,rooms,published,constructionYear,objectType,soldDate,soldPrice,soldPriceSource,additionalArea,apartmentNumber,plotArea, streetAddress,municipalityName,countyName,ocean,latitude,longitude,isApproximate,[name],[type] FROM Sold 
-join Location on Location.Id=Sold.locationId
-join Address on Location.addressId=Address.Id
-join Region on Location.regionId=Region.Id
-join Distance on  Location.distanceId=Distance.Id
-join Position on Location.positionId=Position.Id
-join Sources on Sold.sourceid = Sources.id;`
+`CREATE VIEW ML AS SELECT listPrice,rent,[floor],livingArea,rooms,published,constructionYear,objectType,soldDate,soldPrice,soldPriceSource,additionalArea,apartmentNumber,plotArea,streetAddress,municipalityName,countyName,ocean,latitude,longitude,isApproximate,[name],[type] FROM Sold
+JOIN Location ON Location.Id=Sold.locationId
+JOIN Address ON Location.addressId=Address.Id
+JOIN Region ON Location.regionId=Region.Id
+JOIN Distance ON  Location.distanceId=Distance.Id
+JOIN Position ON Location.positionId=Position.Id
+JOIN Sources ON Sold.sourceid=Sources.id;`
