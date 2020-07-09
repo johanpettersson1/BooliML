@@ -1,5 +1,6 @@
 using BooliML.Model;
 using System;
+using System.Globalization;
 
 namespace BooliML.ConsoleApp
 {
@@ -54,7 +55,7 @@ namespace BooliML.ConsoleApp
             Console.WriteLine($"IsApproximate: {sampleData.IsApproximate}");
             Console.WriteLine($"Name: {sampleData.Name}");
             Console.WriteLine($"Type: {sampleData.Type}");
-            Console.WriteLine($"\n\nPredicted SoldPrice: {predictionResult.Score}\n\n");
+            Console.WriteLine($"\n\nPredicted SoldPrice: {predictionResult.Score.ToString("n", CultureInfo.CurrentCulture)} SEK\n\n");
             Console.WriteLine("=============== End of process, hit any key to finish ===============");
             Console.ReadKey();
         }
