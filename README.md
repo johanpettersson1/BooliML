@@ -2,8 +2,8 @@
 
 # Property valuation app using ML.NET powered by [Booli](https://www.booli.se)
 
-### Example prediction
-![sample output](https://user-images.githubusercontent.com/47982356/87085486-3e707e80-c230-11ea-834a-6d0bd1d3d4e9.png)
+### Example output
+![Example output](https://user-images.githubusercontent.com/47982356/87089151-3fa4aa00-c236-11ea-8aaf-c8620809b455.png)
 
 ## Build
 1. `git clone https://github.com/johanpettersson1/BooliAPI.git`
