@@ -9,8 +9,8 @@
 1. `git clone https://github.com/johanpettersson1/BooliAPI.git`
 2. `dotnet restore`
 3. `dotnet build`
-4. `dotnet ef migrations add InitialCreate --project Booli`
-5. `dotnet ef database update --project Booli`
+4. `dotnet ef migrations add InitialCreate --project BooliML.Data`
+5. `dotnet ef database update --project BooliML.Data`
 6. `dotnet run`
 
 ## Create view in SQL
