@@ -6,7 +6,7 @@
 ![Example output](https://user-images.githubusercontent.com/47982356/87089151-3fa4aa00-c236-11ea-8aaf-c8620809b455.png)
 
 ## Build
-1. `git clone https://github.com/johanpettersson1/BooliAPI.git`
+1. `git clone https://github.com/johanpettersson1/BooliML.git`
 2. `dotnet restore`
 3. `dotnet build`
 4. `dotnet ef migrations add InitialCreate --project BooliML.Data`
