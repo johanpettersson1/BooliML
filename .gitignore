@@ -338,7 +338,8 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-/Booli/App.config
-/Booli/Migrations
+
 /BooliML.ConsoleApp/App.config
 /BooliML.Model/App.config
+/BooliML.Data/App.config
+/BooliML.Data/Migrations
