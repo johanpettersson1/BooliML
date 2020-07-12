@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace Booli.ML.Data.Database
 {
-    internal class BooliMLListingsContext : DbContext
+    public class BooliMLListingsContext : DbContext
     {
         public DbSet<Listing> Listings { get; set; }
         public DbSet<Source> Sources { get; set; }

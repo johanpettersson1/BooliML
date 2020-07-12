@@ -9,6 +9,7 @@ namespace Booli.ML.Data.Database.ListingsModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         public string streetAddress { get; set; }
     }
 
@@ -16,9 +17,11 @@ namespace Booli.ML.Data.Database.ListingsModel
     {
         public double additionalArea { get; set; }
         public int biddingOpen { get; set; }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int booliId { get; set; }
+
         public int? constructionYear { get; set; }
         public float floor { get; set; }
         public int? isNewConstruction { get; set; }
@@ -52,6 +55,7 @@ namespace Booli.ML.Data.Database.ListingsModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         public Address address { get; set; }
         public List<string> namedAreas { get; set; }
         public Position position { get; set; }
@@ -63,6 +67,7 @@ namespace Booli.ML.Data.Database.ListingsModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         public bool? isApproximate { get; set; }
         public double latitude { get; set; }
         public double longitude { get; set; }
@@ -73,6 +78,7 @@ namespace Booli.ML.Data.Database.ListingsModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         public string countyName { get; set; }
         public string municipalityName { get; set; }
     }
@@ -81,6 +87,7 @@ namespace Booli.ML.Data.Database.ListingsModel
     {
         [Key]
         public int areaId { get; set; }
+
         public int upcomingSale { get; set; }
     }
 
@@ -89,6 +96,7 @@ namespace Booli.ML.Data.Database.ListingsModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
+
         public string name { get; set; }
         public string type { get; set; }
         public string url { get; set; }

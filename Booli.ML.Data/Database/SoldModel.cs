@@ -9,6 +9,7 @@ namespace Booli.ML.Data.Database.SoldModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         public string streetAddress { get; set; }
     }
 
@@ -17,6 +18,7 @@ namespace Booli.ML.Data.Database.SoldModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         public int ocean { get; set; }
     }
 
@@ -24,9 +26,11 @@ namespace Booli.ML.Data.Database.SoldModel
     {
         public Address address { get; set; }
         public Distance distance { get; set; }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         public List<string> namedAreas { get; set; }
         public Position position { get; set; }
         public Region region { get; set; }
@@ -37,6 +41,7 @@ namespace Booli.ML.Data.Database.SoldModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         public bool isApproximate { get; set; }
         public double latitude { get; set; }
         public double longitude { get; set; }
@@ -45,9 +50,11 @@ namespace Booli.ML.Data.Database.SoldModel
     public class Region
     {
         public string countyName { get; set; }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         public string municipalityName { get; set; }
     }
 
@@ -61,9 +68,11 @@ namespace Booli.ML.Data.Database.SoldModel
     {
         public double? additionalArea { get; set; }
         public string apartmentNumber { get; set; }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long booliId { get; set; }
+
         public int constructionYear { get; set; }
         public double floor { get; set; }
         public int listPrice { get; set; }
