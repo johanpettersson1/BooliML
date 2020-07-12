@@ -1,4 +1,4 @@
-namespace BooliML.Model
+namespace Booli.ML.Model
 {
     public class ModelOutput
     {

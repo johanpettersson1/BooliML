@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Booli
+namespace Booli.ML.Data
 {
     public class Helpers
     {

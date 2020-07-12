@@ -1,8 +1,7 @@
 using Microsoft.ML;
 using System;
-using System.Configuration;
 
-namespace BooliML.Model
+namespace Booli.ML.Model
 {
     public class ConsumeModel
     {
@@ -22,7 +21,7 @@ namespace BooliML.Model
             MLContext mlContext = new MLContext();
 
             // Load model & create prediction engine
-            string modelPath = ConfigurationManager.AppSettings["MODEL_FILEPATH"];
+            string modelPath = @"C:\Users\Xsnud\AppData\Local\Temp\MLVSTools\BooliMLML\BooliMLML.Model\MLModel.zip";
             ITransformer mlModel = mlContext.Model.Load(modelPath, out var modelInputSchema);
             var predEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
 

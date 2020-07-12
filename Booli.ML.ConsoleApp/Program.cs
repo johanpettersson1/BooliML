@@ -1,34 +1,35 @@
-using BooliML.Model;
+using Booli.ML.Model;
 using System;
-using System.Globalization;
 
-namespace BooliML.ConsoleApp
+namespace Booli.ML.ConsoleApp
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            ModelBuilder.CreateModel();
+
             // Create single instance of sample data from first line of dataset for model input
             ModelInput sampleData = new ModelInput()
             {
-                ListPrice = 2190000F,
-                Rent = 3000F,
-                Floor = @"7,5",
-                LivingArea = @"57",
+                ListPrice = 1695000F,
+                Rent = 3627F,
+                Floor = @"1",
+                LivingArea = @"50",
                 Rooms = @"2",
-                Published = @"2019-08-30 13:37:48",
-                ConstructionYear = 1952F,
+                Published = @"2016-05-21 23:03:24",
+                ConstructionYear = 2007F,
                 ObjectType = @"Lägenhet",
-                SoldPriceSource = @"bobot",
-                AdditionalArea = @"0",
-                ApartmentNumber = 1704F,
-                PlotArea = 0F,
-                StreetAddress = @"Björnsonsgatan 142",
-                MunicipalityName = @"Stockholm",
+                SoldPriceSource = @"bid",
+                AdditionalArea = @"",
+                ApartmentNumber = 1102F,
+                PlotArea = @"",
+                StreetAddress = @"Viksängsvägen 22",
+                MunicipalityName = @"Södertälje",
                 CountyName = @"Stockholms län",
-                Ocean = 8859F,
+                Ocean = 136F,
                 IsApproximate = false,
-                Name = @"Notar",
+                Name = @"Bo Lundvall & Son",
                 Type = @"Broker",
             };
 
@@ -55,8 +56,9 @@ namespace BooliML.ConsoleApp
             Console.WriteLine($"IsApproximate: {sampleData.IsApproximate}");
             Console.WriteLine($"Name: {sampleData.Name}");
             Console.WriteLine($"Type: {sampleData.Type}");
-            Console.WriteLine($"\n\nPredicted SoldPrice: {predictionResult.Score.ToString("n", CultureInfo.CurrentCulture)} SEK\n\n");
+            Console.WriteLine($"\n\nPredicted SoldPrice: {predictionResult.Score}\n\n");
             Console.WriteLine("=============== End of process, hit any key to finish ===============");
+
             Console.ReadKey();
         }
     }

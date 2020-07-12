@@ -1,20 +1,18 @@
-using BooliML.Model;
+using Booli.ML.Model;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 
-namespace BooliML.ConsoleApp
+namespace Booli.ML.ConsoleApp
 {
     public static class ModelBuilder
     {
-        private static string TRAIN_DATA_FILEPATH = ConfigurationManager.AppSettings["TRAIN_DATA_FILEPATH"];
-        private static string MODEL_FILEPATH = ConfigurationManager.AppSettings["MODEL_FILEPATH"];
-        // Create MLContext to be shared across the model creation workflow objects 
-        // Set a random seed for repeatable/deterministic results across multiple trainings.
+        private static string TRAIN_DATA_FILEPATH = @"C:\Users\Xsnud\AppData\Local\Temp\8655277e-cc81-4d6a-bc19-07fa2042a1a8.tsv";
+        private static string MODEL_FILEPATH = @"C:\Users\Xsnud\AppData\Local\Temp\MLVSTools\Booli.ML\Booli.ML.Model\MLModel.zip";
+
         private static MLContext mlContext = new MLContext(seed: 1);
 
         public static void CreateModel()
@@ -42,14 +40,14 @@ namespace BooliML.ConsoleApp
 
         public static IEstimator<ITransformer> BuildTrainingPipeline(MLContext mlContext)
         {
-            // Data process configuration with pipeline data transformations 
+            // Data process configuration with pipeline data transformations
             var dataProcessPipeline = mlContext.Transforms.Conversion.ConvertType(new[] { new InputOutputColumnPair("isApproximate", "isApproximate") })
                                       .Append(mlContext.Transforms.Categorical.OneHotEncoding(new[] { new InputOutputColumnPair("floor", "floor"), new InputOutputColumnPair("rooms", "rooms"), new InputOutputColumnPair("objectType", "objectType"), new InputOutputColumnPair("soldPriceSource", "soldPriceSource"), new InputOutputColumnPair("additionalArea", "additionalArea"), new InputOutputColumnPair("municipalityName", "municipalityName"), new InputOutputColumnPair("countyName", "countyName"), new InputOutputColumnPair("name", "name"), new InputOutputColumnPair("type", "type") }))
-                                      .Append(mlContext.Transforms.Categorical.OneHotHashEncoding(new[] { new InputOutputColumnPair("livingArea", "livingArea") }))
+                                      .Append(mlContext.Transforms.Categorical.OneHotHashEncoding(new[] { new InputOutputColumnPair("livingArea", "livingArea"), new InputOutputColumnPair("plotArea", "plotArea") }))
                                       .Append(mlContext.Transforms.Text.FeaturizeText("published_tf", "published"))
                                       .Append(mlContext.Transforms.Text.FeaturizeText("streetAddress_tf", "streetAddress"))
-                                      .Append(mlContext.Transforms.Concatenate("Features", new[] { "isApproximate", "floor", "rooms", "objectType", "soldPriceSource", "additionalArea", "municipalityName", "countyName", "name", "type", "livingArea", "published_tf", "streetAddress_tf", "listPrice", "rent", "constructionYear", "apartmentNumber", "plotArea", "ocean" }));
-            // Set the training algorithm 
+                                      .Append(mlContext.Transforms.Concatenate("Features", new[] { "isApproximate", "floor", "rooms", "objectType", "soldPriceSource", "additionalArea", "municipalityName", "countyName", "name", "type", "livingArea", "plotArea", "published_tf", "streetAddress_tf", "listPrice", "rent", "constructionYear", "apartmentNumber", "ocean" }));
+            // Set the training algorithm
             var trainer = mlContext.Regression.Trainers.LightGbm(labelColumnName: "soldPrice", featureColumnName: "Features");
 
             var trainingPipeline = dataProcessPipeline.Append(trainer);

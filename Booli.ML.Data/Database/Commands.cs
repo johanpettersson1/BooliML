@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Booli.Database
+namespace Booli.ML.Data.Database
 {
     public class Commands
     {

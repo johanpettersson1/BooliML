@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Booli.Database
+namespace Booli.ML.Data.Database
 {
     public class Query
     {
@@ -87,13 +86,13 @@ namespace Booli.Database
         public string published { get; set; }
         public int constructionYear { get; set; }
         public string objectType { get; set; }
-        public DateTime soldDate { get; set; }
+        public string soldDate { get; set; }
         public int soldPrice { get; set; }
         public string soldPriceSource { get; set; }
         public string url { get; set; }
         public double? additionalArea { get; set; }
         public string apartmentNumber { get; set; }
-        public int? plotArea { get; set; }
+        public double? plotArea { get; set; }
     }
 
     public class SearchParams

@@ -1,13 +1,13 @@
-﻿using Booli.Database;
+﻿using Booli.ML.Data.Database;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text.Json;
 
-namespace Booli
+namespace Booli.ML.Data
 {
-    class BooliContext : DbContext
+    internal class BooliContext : DbContext
     {
         public DbSet<Sold> Sold { get; set; }
         public DbSet<Source> Sources { get; set; }
@@ -19,7 +19,7 @@ namespace Booli
             {
                 optionsBuilder.UseSqlServer(ConfigurationManager.AppSettings["connectionString"]);
             }
-            catch(ArgumentNullException)
+            catch (ArgumentNullException)
             {
                 optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Booli;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }

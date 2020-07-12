@@ -1,4 +1,4 @@
-﻿using Booli.Database;
+﻿using Booli.ML.Data.Database;
 using System;
 using System.Configuration;
 using System.IO;
@@ -6,19 +6,20 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
 
-namespace Booli
+namespace Booli.ML.Data
 {
-    class Program
+    internal class Program
     {
         public static HttpClient client = new HttpClient();
 
-        static void Main(string[] args)
+        //@TODO: make two methods. One for scraping SOLD and one for scraping listings.
+        private static void Main(string[] args)
         {
             string baseUrl = "https://api.booli.se/";
             string callerId = ConfigurationManager.AppSettings["callerId"];
             string privateKey = ConfigurationManager.AppSettings["privateKey"];
             string queryKey = "sold"; // possible values: [listings, sold, areas]
-            string queryValue = "stockholm"; // stockholm, nacka, etc.
+            string queryValue = "sverige"; // stockholm, nacka, etc.
             long limit = 500; // max 500. src: https://www.booli.se/p/api/
             long offset = 0;
             long max = int.MaxValue;
@@ -38,7 +39,7 @@ namespace Booli
                 }
 
                 offset += 500;
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
             }
         }
     }
