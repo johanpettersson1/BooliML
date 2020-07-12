@@ -2,22 +2,22 @@
 
 # Property valuation app using ML.NET powered by [Booli](https://www.booli.se)
 
-### Example prediction
-![sample output](https://user-images.githubusercontent.com/47982356/87085486-3e707e80-c230-11ea-834a-6d0bd1d3d4e9.png)
+### Example output
+![Example output](https://user-images.githubusercontent.com/47982356/87089151-3fa4aa00-c236-11ea-8aaf-c8620809b455.png)
 
 ## Build
-1. `git clone https://github.com/johanpettersson1/BooliAPI.git`
+1. `git clone https://github.com/johanpettersson1/BooliML.git`
 2. `dotnet restore`
 3. `dotnet build`
 4. `dotnet ef migrations add InitialCreate --project BooliML.Data`
 5. `dotnet ef database update --project BooliML.Data`
-6. `dotnet run`
+6. `dotnet run --project BooliML.Data`
 
 ## Create view in SQL
-`CREATE VIEW ML AS SELECT listPrice,rent,[floor],livingArea,rooms,published,constructionYear,objectType,soldDate,soldPrice,soldPriceSource,additionalArea,apartmentNumber,plotArea, streetAddress,municipalityName,countyName,ocean,latitude,longitude,isApproximate,[name],[type] FROM Sold 
-join Location on Location.Id=Sold.locationId
-join Address on Location.addressId=Address.Id
-join Region on Location.regionId=Region.Id
-join Distance on  Location.distanceId=Distance.Id
-join Position on Location.positionId=Position.Id
-join Sources on Sold.sourceid = Sources.id;`
+`CREATE VIEW ML AS SELECT listPrice,rent,[floor],livingArea,rooms,published,constructionYear,objectType,soldDate,soldPrice,soldPriceSource,additionalArea,apartmentNumber,plotArea,streetAddress,municipalityName,countyName,ocean,latitude,longitude,isApproximate,[name],[type] FROM Sold
+JOIN Location ON Location.Id=Sold.locationId
+JOIN Address ON Location.addressId=Address.Id
+JOIN Region ON Location.regionId=Region.Id
+JOIN Distance ON  Location.distanceId=Distance.Id
+JOIN Position ON Location.positionId=Position.Id
+JOIN Sources ON Sold.sourceid=Sources.id;`
