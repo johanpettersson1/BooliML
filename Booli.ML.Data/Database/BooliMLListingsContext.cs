@@ -1,8 +1,6 @@
 ﻿using Booli.ML.Data.Database.ListingsModel;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Text.Json;
 
 namespace Booli.ML.Data.Database
