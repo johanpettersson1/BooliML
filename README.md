@@ -15,7 +15,7 @@
 7. `dotnet ef database update --project Booli.ML.Data --context BooliMLListingsContext`
 8. `dotnet run --project Booli.ML.Data`
 
-## Create view in SQL
+## Create ML view in SQL
 `CREATE VIEW ML AS SELECT listPrice,rent,[floor],livingArea,rooms,published,constructionYear,objectType,soldDate,soldPrice,soldPriceSource,additionalArea,apartmentNumber,plotArea,streetAddress,municipalityName,countyName,ocean,latitude,longitude,isApproximate,[name],[type] FROM Sold
 JOIN Location ON Location.Id=Sold.locationId
 JOIN Address ON Location.addressId=Address.Id
