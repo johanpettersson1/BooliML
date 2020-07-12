@@ -10,10 +10,10 @@
 2. `dotnet restore`
 3. `dotnet build`
 4. `dotnet ef migrations add InitialCreate --project Booli.ML.Data --context BooliMLSoldContext`
-4. `dotnet ef migrations add InitialCreate --project Booli.ML.Data --context BooliMLListingsContext`
-5. `dotnet ef database update --project Booli.ML.Data --context BooliMLSoldContext`
-5. `dotnet ef database update --project Booli.ML.Data --context BooliMLListingsContext`
-6. `dotnet run --project Booli.ML.Data`
+5. `dotnet ef migrations add InitialCreate --project Booli.ML.Data --context BooliMLListingsContext`
+6. `dotnet ef database update --project Booli.ML.Data --context BooliMLSoldContext`
+7. `dotnet ef database update --project Booli.ML.Data --context BooliMLListingsContext`
+8. `dotnet run --project Booli.ML.Data`
 
 ## Create view in SQL
 `CREATE VIEW ML AS SELECT listPrice,rent,[floor],livingArea,rooms,published,constructionYear,objectType,soldDate,soldPrice,soldPriceSource,additionalArea,apartmentNumber,plotArea,streetAddress,municipalityName,countyName,ocean,latitude,longitude,isApproximate,[name],[type] FROM Sold
