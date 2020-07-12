@@ -20,6 +20,10 @@ namespace Booli.ML.WebAPI
         {
             services.AddControllers();
             services.AddDbContext<Data.Database.BooliMLListingsContext>();
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyOrigin();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,6 +35,8 @@ namespace Booli.ML.WebAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 

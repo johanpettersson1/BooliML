@@ -5,51 +5,105 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts == null)
+@if (listings == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    //TODO: populate dropdown
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    private Listing[] listings;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        listings = await Http.GetFromJsonAsync<Listing[]>("https://localhost:44315/api/listings");
     }
 
-    public class WeatherForecast
+    public class Address
     {
-        public DateTime Date { get; set; }
+        public string Id { get; set; }
 
-        public int TemperatureC { get; set; }
+        public string streetAddress { get; set; }
+    }
 
-        public string Summary { get; set; }
+    public class Listing
+    {
+        public double additionalArea { get; set; }
+        public int biddingOpen { get; set; }
 
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        public int booliId { get; set; }
+
+        public int? constructionYear { get; set; }
+        public float floor { get; set; }
+        public int? isNewConstruction { get; set; }
+        public int? listPrice { get; set; }
+        public int? listPriceChange { get; set; }
+        public string listPriceChangeDate { get; set; }
+        public double livingArea { get; set; }
+        public Location location { get; set; }
+        public int? mortgageDeed { get; set; }
+        public string objectType { get; set; }
+        public double? plotArea { get; set; }
+        public string published { get; set; }
+        public int rent { get; set; }
+        public double rooms { get; set; }
+        public Source source { get; set; }
+        public string url { get; set; }
+    }
+
+    public class ListingsQuery
+    {
+        public int count { get; set; }
+        public int limit { get; set; }
+        public List<Listing> listings { get; set; }
+        public int offset { get; set; }
+        public SearchParams searchParams { get; set; }
+        public int totalCount { get; set; }
+    }
+
+    public class Location
+    {
+        public string Id { get; set; }
+
+        public Address address { get; set; }
+        public List<string> namedAreas { get; set; }
+        public Position position { get; set; }
+        public Region region { get; set; }
+    }
+
+    public class Position
+    {
+        public string Id { get; set; }
+
+        public bool? isApproximate { get; set; }
+        public double latitude { get; set; }
+        public double longitude { get; set; }
+    }
+
+    public class Region
+    {
+        public string Id { get; set; }
+
+        public string countyName { get; set; }
+        public string municipalityName { get; set; }
+    }
+
+    public class SearchParams
+    {
+        public int areaId { get; set; }
+
+        public int upcomingSale { get; set; }
+    }
+
+    public class Source
+    {
+        public int id { get; set; }
+
+        public string name { get; set; }
+        public string type { get; set; }
+        public string url { get; set; }
     }
 }
