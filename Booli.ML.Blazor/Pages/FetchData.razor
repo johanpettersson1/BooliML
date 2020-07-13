@@ -9,7 +9,7 @@
 }
 else
 {
-    <input list="listings" id="listing" name="listing" placeholder="Search address.." @bind="CurrentValue" @bind:event="oninput"/>
+    <input list="listings" id="listing" name="listing" placeholder="Search address.." @oninput="HandleInput" />
     <datalist id="listings">
         @if (listings.Any())
         {
@@ -23,20 +23,23 @@ else
 
 @code {
     private ViewData[] listings;
-    private string _val;
-    private string CurrentValue { get { return _val; } set { _val = value; FilterListings(); } }
+    private string _Val;
 
     protected override async Task OnInitializedAsync()
     {
         listings = await Http.GetFromJsonAsync<ViewData[]>("https://localhost:44315/api/listings");
     }
 
-    private async Task FilterListings()
+    private async void HandleInput(ChangeEventArgs e)
     {
-        if(CurrentValue.Any())
-            listings = await Http.GetFromJsonAsync<ViewData[]>("https://localhost:44315/api/listings/" + CurrentValue);
+        var input = e.Value.ToString();
+        if (input.Length > 0)
+        {
+            listings = await Http.GetFromJsonAsync<ViewData[]>("https://localhost:44315/api/listings/" + input);
+            StateHasChanged();
+            await Task.Delay(1);
+        }
     }
-
     public class ViewData
     {
         public int BooliId { get; set; }
