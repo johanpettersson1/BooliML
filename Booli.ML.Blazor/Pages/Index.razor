@@ -1,7 +1,50 @@
 ﻿@page "/"
 
-<h1>
-    JP Valuator
-</h1>
+@inject HttpClient Http
 
-A property valuation app using ML.NET powered by <a href="https://booli.se" target="_blank">Booli</a>
+<h1>Listings</h1>
+
+@if (listings == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <input list="listings" id="listing" name="listing" placeholder="Search address.." @oninput="HandleInput" />
+    <datalist id="listings">
+        @if (listings.Any())
+        {
+            @foreach (var item in listings)
+            {
+                <option value="@item.StreetAddress, @item.Municipality, @item.County" />
+            }
+        }
+    </datalist>
+}
+
+@code {
+    private ViewData[] listings;
+
+    protected override async Task OnInitializedAsync()
+    {
+        listings = await Http.GetFromJsonAsync<ViewData[]>("https://localhost:44315/api/listings");
+    }
+
+    private async void HandleInput(ChangeEventArgs e)
+    {
+        var input = e.Value.ToString();
+        if (input.Length > 0)
+        {
+            listings = await Http.GetFromJsonAsync<ViewData[]>("https://localhost:44315/api/listings/" + input);
+            StateHasChanged();
+            await Task.Delay(1);
+        }
+    }
+    public class ViewData
+    {
+        public int BooliId { get; set; }
+        public string StreetAddress { get; set; }
+        public string Municipality { get; set; }
+        public string County { get; set; }
+    }
+}

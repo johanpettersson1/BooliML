@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booli.ML.Model", "Booli.ML.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booli.ML.ConsoleApp", "Booli.ML.ConsoleApp\Booli.ML.ConsoleApp.csproj", "{22224ECF-F659-46BB-8028-6214BD6F8B8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booli.ML.Blazor", "Booli.ML.Blazor\Booli.ML.Blazor.csproj", "{70CC5D62-2B32-4C06-BC12-2DE9826E3B46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booli.ML.Blazor", "Booli.ML.Blazor\Booli.ML.Blazor.csproj", "{70CC5D62-2B32-4C06-BC12-2DE9826E3B46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booli.ML.WebAPI", "Booli.ML.WebAPI\Booli.ML.WebAPI.csproj", "{7AD0E08A-C0F6-4C3D-95EC-B7A1CB3D9AA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booli.ML.WebAPI", "Booli.ML.WebAPI\Booli.ML.WebAPI.csproj", "{7AD0E08A-C0F6-4C3D-95EC-B7A1CB3D9AA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
