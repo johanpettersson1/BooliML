@@ -23,15 +23,13 @@ namespace Booli.ML.WebAPI.Controllers
         public async Task<ActionResult<List<ViewData>>> GetListing(string filter)
         {
             if (filter == null)
-                return await _context.Listings.Include(l => l.location).ThenInclude(a => a.address)
+                return await _context.Listings.AsNoTracking().Include(l => l.location).ThenInclude(a => a.address)
                     .Select(l => new ViewData { BooliId = l.booliId, StreetAddress = l.location.address.streetAddress, County = l.location.region.countyName, Municipality = l.location.region.municipalityName })
-                    .Distinct()
                     .OrderBy(vd => vd.StreetAddress)
                     .Take(10).ToListAsync();
 
-            return await _context.Listings.Include(l => l.location).ThenInclude(a => a.address)
+            return await _context.Listings.AsNoTracking().Include(l => l.location).ThenInclude(a => a.address)
                 .Select(l => new ViewData { BooliId = l.booliId, StreetAddress = l.location.address.streetAddress, County = l.location.region.countyName, Municipality = l.location.region.municipalityName })
-                .Distinct()
                 .Where(vd => vd.StreetAddress.Contains(filter))
                 .OrderBy(vd => vd.StreetAddress).Take(10).ToListAsync();
         }
@@ -43,13 +41,5 @@ namespace Booli.ML.WebAPI.Controllers
         public string StreetAddress { get; set; }
         public string County { get; set; }
         public string Municipality { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            return obj is ViewData data &&
-                   StreetAddress == data.StreetAddress &&
-                   County == data.County &&
-                   Municipality == data.Municipality;
-        }
     }
 }
