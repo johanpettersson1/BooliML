@@ -1,14 +1,11 @@
 ﻿@inherits LayoutComponentBase
 
-<nav class="navbar navbar-light bg-light d-block">
-    <a class="navbar-brand" href="#">
-        <img src="/logo-small_200w.png" width="30" height="30" class="d-inline-block align-top" alt="JP">
-        JP
-    </a>
-    <a href="/">home</a>
-    <a href="about">about</a>
-</nav>
+<div class="sidebar">
+    <NavMenu />
+</div>
 
-<div class="px-4">
-    @Body
+<div class="main">
+    <div class="content px-4">
+        @Body
+    </div>
 </div>

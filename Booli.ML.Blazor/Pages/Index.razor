@@ -2,7 +2,7 @@
 
 @inject HttpClient Http
 
-<h1>Listings</h1>
+<h1>Properties for sale</h1>
 
 @if (listings == null)
 {
@@ -10,24 +10,29 @@
 }
 else
 {
-    <input list="listings" id="listing" name="listing" placeholder="Search address.." @oninput="HandleInput" />
+    <input list="listings" id="listing" name="listing" autocomplete="on" placeholder="Search address..." @oninput="HandleInput" @onchange="HandleDatalistOnChange" />
     <datalist id="listings">
-        @if (listings.Any())
+        @foreach (var item in listings)
         {
-            @foreach (var item in listings)
-            {
-                <option value="@item.StreetAddress, @item.Municipality, @item.County" />
-            }
+            <option id="@item.BooliId" value="@item.StreetAddress">@item.Municipality, @item.County</option>
         }
     </datalist>
+    <button @onclick="GetProperty">Get</button>
 }
 
 @code {
     private ViewData[] listings;
+    private string selectedViewData;
 
     protected override async Task OnInitializedAsync()
     {
         listings = await Http.GetFromJsonAsync<ViewData[]>("https://localhost:44315/api/listings");
+    }
+
+    private void GetProperty()
+    { 
+        // Get property from db using BooliId
+        Console.WriteLine(selectedViewData);
     }
 
     private async void HandleInput(ChangeEventArgs e)
@@ -40,6 +45,13 @@ else
             await Task.Delay(1);
         }
     }
+
+    private void HandleDatalistOnChange(ChangeEventArgs e)
+    {
+        selectedViewData = e.Value.ToString();
+        Console.WriteLine(selectedViewData);
+    }
+
     public class ViewData
     {
         public int BooliId { get; set; }

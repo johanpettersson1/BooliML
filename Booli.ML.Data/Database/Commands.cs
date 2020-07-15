@@ -40,10 +40,10 @@ namespace Booli.ML.Data.Database
             {
                 using (var _context = new BooliMLListingsContext())
                 {
-                    var sold = _context.Listings.Where(s => s.booliId == listing.booliId).FirstOrDefault();
-                    if (sold != null)
+                    var oldListing = _context.Listings.Where(s => s.booliId == listing.booliId).FirstOrDefault();
+                    if (oldListing != null)
                     {
-                        _context.Listings.Remove(sold);
+                        _context.Listings.Remove(oldListing);
                         _context.SaveChanges();
                     }
 
