@@ -10,53 +10,45 @@
 }
 else
 {
-    <input list="listings" id="listing" name="listing" autocomplete="on" placeholder="Search address..." @oninput="HandleInput" @onchange="HandleDatalistOnChange" />
+    <input list="listings" id="listing" name="listing" placeholder="Search address..." @oninput="HandleInput" @bind="selectedViewData" />
     <datalist id="listings">
         @foreach (var item in listings)
         {
-            <option id="@item.BooliId" value="@item.StreetAddress">@item.Municipality, @item.County</option>
+            <option value="@item.location.address.streetAddress, @item.location.region.municipalityName, @item.location.region.countyName"/>
         }
     </datalist>
     <button @onclick="GetProperty">Get</button>
 }
 
 @code {
-    private ViewData[] listings;
+    [Parameter]
+    public List<Listing> listings { get; set; }
     private string selectedViewData;
 
     protected override async Task OnInitializedAsync()
     {
-        listings = await Http.GetFromJsonAsync<ViewData[]>("https://localhost:44315/api/listings");
+        listings = await Http.GetFromJsonAsync<List<Listing>>("https://localhost:44315/api/listings");
     }
 
     private void GetProperty()
-    { 
-        // Get property from db using BooliId
-        Console.WriteLine(selectedViewData);
+    {
+        var listing = listings.Where(l => new String($"{l.location.address.streetAddress}, {l.location.region.municipalityName}, {l.location.region.countyName}").Equals(selectedViewData)).FirstOrDefault();
+        Console.WriteLine(listing?.booliId);
     }
 
     private async void HandleInput(ChangeEventArgs e)
     {
         var input = e.Value.ToString();
+        if (listings.Any(l => new String($"{l.location.address.streetAddress}, {l.location.region.municipalityName}, {l.location.region.countyName}").Equals(input)))
+        {
+            return;
+        }
+
         if (input.Length > 0)
         {
-            listings = await Http.GetFromJsonAsync<ViewData[]>("https://localhost:44315/api/listings/" + input);
+            listings = await Http.GetFromJsonAsync<List<Listing>>("https://localhost:44315/api/listings/" + input);
             StateHasChanged();
             await Task.Delay(1);
         }
-    }
-
-    private void HandleDatalistOnChange(ChangeEventArgs e)
-    {
-        selectedViewData = e.Value.ToString();
-        Console.WriteLine(selectedViewData);
-    }
-
-    public class ViewData
-    {
-        public int BooliId { get; set; }
-        public string StreetAddress { get; set; }
-        public string Municipality { get; set; }
-        public string County { get; set; }
     }
 }

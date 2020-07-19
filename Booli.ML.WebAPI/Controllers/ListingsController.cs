@@ -1,4 +1,5 @@
 ﻿using Booli.ML.Data.Database;
+using Booli.ML.Data.Database.ListingsModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -20,26 +21,14 @@ namespace Booli.ML.WebAPI.Controllers
 
         // GET: api/Listings/5
         [HttpGet("{filter?}")]
-        public async Task<ActionResult<List<ViewData>>> GetListing(string filter)
+        public async Task<ActionResult<List<Listing>>> GetListing(string filter)
         {
             if (filter == null)
-                return await _context.Listings.AsNoTracking().Include(l => l.location).ThenInclude(a => a.address)
-                    .Select(l => new ViewData { BooliId = l.booliId, StreetAddress = l.location.address.streetAddress, County = l.location.region.countyName, Municipality = l.location.region.municipalityName })
-                    .OrderBy(vd => vd.StreetAddress)
+                return await _context.Listings.AsNoTracking().Include(l => l.location.address).Include(l => l.location.region)
                     .Take(10).ToListAsync();
 
-            return await _context.Listings.AsNoTracking().Include(l => l.location).ThenInclude(a => a.address)
-                .Select(l => new ViewData { BooliId = l.booliId, StreetAddress = l.location.address.streetAddress, County = l.location.region.countyName, Municipality = l.location.region.municipalityName })
-                .Where(vd => vd.StreetAddress.Contains(filter))
-                .OrderBy(vd => vd.StreetAddress).Take(10).ToListAsync();
+            return await _context.Listings.AsNoTracking().Include(l => l.location.address).Include(l => l.location.region)
+            .Where(vd => vd.location.address.streetAddress.Contains(filter)).Take(10).ToListAsync();
         }
-    }
-
-    public class ViewData
-    {
-        public int BooliId { get; set; }
-        public string StreetAddress { get; set; }
-        public string County { get; set; }
-        public string Municipality { get; set; }
     }
 }
